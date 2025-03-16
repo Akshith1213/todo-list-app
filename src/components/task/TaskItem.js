@@ -18,7 +18,10 @@ const TaskItem = ({ task }) => {
         <TaskHeader>
           <TaskWrapper>
             <PriorityDot priority={task.priority} />
-            <TaskText completed={task.completed}>{task.text}</TaskText>
+            <div>
+              <TaskText completed={task.completed}>{task.text}</TaskText>
+              {task.category && <CategoryTag>{task.category}</CategoryTag>}
+            </div>
           </TaskWrapper>
           <ButtonGroup>
             <IconButton
@@ -46,6 +49,17 @@ const TaskItem = ({ task }) => {
     </Container>
   );
 };
+
+// Add this new styled component
+const CategoryTag = styled.span`
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  margin-left: 8px;
+  background: ${({ theme }) => theme.colors.accent + '20'};
+  color: ${({ theme }) => theme.colors.accent};
+  border-radius: ${({ theme }) => theme.borderRadius.small};
+`;
 
 const Container = styled(motion.div)`
   background: ${({ theme }) => theme.colors.secondary};
