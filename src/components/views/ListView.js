@@ -10,7 +10,9 @@ const ListView = ({ view }) => {
   const [searchTerm, setSearchTerm] = useState('');
   
   const filteredTasks = tasks.filter(task => {
-    const matchesView = view === 'completed' ? task.completed : !task.completed;
+    const matchesView = view === 'completed' ? task.completed : 
+                       view === 'active' ? !task.completed :
+                       task.priority === view; // Handle priority filtering
     const matchesSearch = 
       task.text.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (task.category && task.category.toLowerCase().includes(searchTerm.toLowerCase()));

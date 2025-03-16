@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// Removed unused motion import
 
 const ViewSelector = ({ currentView, onViewChange }) => {
   return (
@@ -17,30 +16,61 @@ const ViewSelector = ({ currentView, onViewChange }) => {
       >
         Completed
       </ViewButton>
-      <ViewButton
-        $active={currentView === 'all'}
-        onClick={() => onViewChange('all')}
-      >
-        All
-      </ViewButton>
+      <PriorityContainer>
+        <ViewButton
+          $active={currentView === 'low'}
+          onClick={() => onViewChange('low')}
+          $priority="low"
+        >
+          Low
+        </ViewButton>
+        <ViewButton
+          $active={currentView === 'medium'}
+          onClick={() => onViewChange('medium')}
+          $priority="medium"
+        >
+          Medium
+        </ViewButton>
+        <ViewButton
+          $active={currentView === 'high'}
+          onClick={() => onViewChange('high')}
+          $priority="high"
+        >
+          High
+        </ViewButton>
+      </PriorityContainer>
     </Container>
   );
 };
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 1rem;
   margin-bottom: 2rem;
+`;
+
+const PriorityContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
 `;
 
 const ViewButton = styled.button`
   padding: 0.8rem 1.5rem;
   border: none;
   border-radius: ${({ theme }) => theme.borderRadius.medium};
-  background: ${({ $active, theme }) => 
-    $active ? theme.colors.accent : theme.colors.secondary};
-  color: ${({ $active, theme }) => 
-    $active ? '#fff' : theme.colors.text};
+  background: ${({ $active, $priority, theme }) => {
+    if ($active) {
+      switch ($priority) {
+        case 'high': return theme.colors.danger;
+        case 'medium': return '#ff9800';
+        case 'low': return '#4caf50';
+        default: return theme.colors.accent;
+      }
+    }
+    return theme.colors.secondary;
+  }};
+  color: ${({ $active, theme }) => $active ? '#fff' : theme.colors.text};
   cursor: pointer;
   transition: all 0.3s ease;
 
