@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "todolist-2d11e"
+  },
+  "targets": {
+    "todolist-2d11e": {
+      "hosting": {
+        "akshithReddytodolist": [
+          "akshithReddytodolist"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
